@@ -8,9 +8,7 @@ RUN apk update \
     && apk add squid \
     && rm -rf /var/cache/apk/*
 
-COPY stunnel.conf /etc/stunnel/stunnel.conf
-COPY pkey.pem /etc/stunnel/pkey.pem
-COPY cert.pem /etc/stunnel/cert.pem
+COPY stunnel.conf pkey.pem cert.pem /etc/stunnel/
 
 EXPOSE 443
 
