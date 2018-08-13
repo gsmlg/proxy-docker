@@ -12,7 +12,7 @@ NGINX=$(/usr/bin/which nginx)
 
 # Launch squid
 echo "Starting Nginx..."
-exec "$NGINX"
+"$NGINX"
 
 echo "Watching Sites files change"
 inotifyd /watcher.sh /etc/nginx/sites
