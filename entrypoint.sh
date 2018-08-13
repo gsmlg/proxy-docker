@@ -16,12 +16,6 @@ echo "Initializing cache..."
 # Give the Squid cache some time to rebuild.
 sleep 5
 
-mkdir -p /run/stunnel
-"$CHOWN" -R stunnel:stunnel /run/stunnel
-
-# start stunnel in background
-stunnel /etc/stunnel/stunnel.conf
-
 # Launch squid
 echo "Starting Squid..."
 exec "$SQUID" -NYCd 1
