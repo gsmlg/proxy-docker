@@ -7,7 +7,7 @@ RUN apk update \
     && apk add stunnel \
     && rm -rf /var/cache/apk/*
 
-COPY stunnel.conf pkey.pem cert.pem /etc/stunnel/
+COPY stunnel.conf stunnel-client.conf pkey.pem cert.pem /etc/stunnel/
 
 EXPOSE 80 443
 

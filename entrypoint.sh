@@ -15,7 +15,7 @@ then
     REMOTE_HOST=${REMOTE_HOST:-proxy}
     sed -i'' "s/REMOTE_HOST/${REMOTE_HOST}/g" "$CONF"
 else
-    conf=/etc/stunnel/stunnel.conf
+    CONF=/etc/stunnel/stunnel.conf
 fi
 
 # start stunnel in foreground
