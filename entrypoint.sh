@@ -3,25 +3,22 @@
 set -e
 
 CHOWN=$(/usr/bin/which chown)
-SQUID=$(/usr/bin/which squid)
+STUNNEL=$(/usr/bin/which stunnel)
 
 # Ensure permissions are set correctly on the Squid cache + log dir.
-"$CHOWN" -R squid:squid /var/cache/squid
-"$CHOWN" -R squid:squid /var/log/squid
-
-# Prepare the cache using Squid.
-echo "Initializing cache..."
-"$SQUID" -z
-
-# Give the Squid cache some time to rebuild.
-sleep 5
-
 mkdir -p /run/stunnel
 "$CHOWN" -R stunnel:stunnel /run/stunnel
 
-# start stunnel in background
-stunnel /etc/stunnel/stunnel.conf
+if test "$1" "==" "client"
+then
+    CONF=/etc/stunnel/stunnel-client.conf
+    REMOTE_HOST=${REMOTE_HOST:-proxy}
+    sed -i'' "s/REMOTE_HOST/${REMOTE_HOST}/g" "$CONF"
+else
+    conf=/etc/stunnel/stunnel.conf
+fi
 
-# Launch squid
-echo "Starting Squid..."
-exec "$SQUID" -NYCd 1
+# start stunnel in foreground
+echo "Starting Stunnel..."
+exec "$STUNNEL" "$CONF"
+
