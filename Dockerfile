@@ -2,8 +2,8 @@ FROM alpine:3.8
 
 MAINTAINER GSMLG < me@gsmlg.org >
 
-ENV SERVER_MODE=master \
-    SERVER_URL="" \
+ENV PROXY_MODE=master \
+    PROXY_SERVER="" \
     PRIVATE_KEY=/etc/stunnel/pkey.pem \
     CERTIFICATE=/etc/stunnel/cert.pem
 

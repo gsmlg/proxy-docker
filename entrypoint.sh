@@ -9,14 +9,14 @@ STUNNEL=$(/usr/bin/which stunnel)
 mkdir -p /run/stunnel
 "$CHOWN" -R stunnel:stunnel /run/stunnel
 
-SERVER_MODE=${SERVER_MODE:-master}
-SERVER_URL=${SERVER_URL}
+PROXY_MODE=${PROXY_MODE:-master}
+PROXY_SERVER=${PROXY_SERVER}
 PRIVATE_KEY=${PRIVATE_KEY:-/etc/stunnel/pkey.pem}
 CERTIFICATE=${CERTIFICATE:-/etc/stunnel/cert.pem}
 
 CONF=/etc/stunnel/stunnel.conf
 
-if test "$SERVER_MODE" "==" "master"
+if test "$PROXY_MODE" "==" "master"
 then
   # server mode
   cat <<EOF > "${CONF}"
@@ -71,7 +71,7 @@ socket = r:TCP_NODELAY=1
 
 [https]
 accept = 80
-connect = $SERVER_URL
+connect = $PROXY_SERVER
 TIMEOUTclose = 0
 verifyChain = no
 
