@@ -9,10 +9,24 @@ STUNNEL=$(/usr/bin/which stunnel)
 mkdir -p /run/stunnel
 "$CHOWN" -R stunnel:stunnel /run/stunnel
 
+if test -f /etc/certs/gsmlg.org/fullchain.cer
+then
+    CERT=/etc/certs/gsmlg.org/fullchain.cer
+else
+    CERT=/etc/stunnel/cert.pem
+fi
+
+if test -f /etc/certs/gsmlg.org/gsmlg.org.key
+then
+    KEY=/etc/certs/gsmlg.org/gsmlg.org.key
+else
+    KEY=/etc/stunnel/pkey.pem
+fi
+
 PROXY_MODE=${PROXY_MODE:-master}
 PROXY_SERVER=${PROXY_SERVER}
-PRIVATE_KEY=${PRIVATE_KEY:-/etc/stunnel/pkey.pem}
-CERTIFICATE=${CERTIFICATE:-/etc/stunnel/cert.pem}
+PRIVATE_KEY=${PRIVATE_KEY:-$KEY}
+CERTIFICATE=${CERTIFICATE:-$CERT}
 
 CONF=/etc/stunnel/stunnel.conf
 
