@@ -4,6 +4,8 @@ set -e
 
 CHOWN=$(/usr/bin/which chown)
 SQUID=$(/usr/bin/which squid)
+WAIT_TIME=${SQUID_WAIT:-5}
+PROXY_MODE=${PROXY_MODE:-master}
 
 if test "$PROXY_MODE" "==" "master"
 then
@@ -18,7 +20,6 @@ echo "Initializing cache..."
 "$SQUID" -z
 
 # Give the Squid cache some time to rebuild.
-WAIT_TIME=${SQUID_WAIT:-5}
 sleep 5
 
 # Launch squid
