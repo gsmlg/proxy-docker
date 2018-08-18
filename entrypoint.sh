@@ -82,7 +82,8 @@ socket = l:TCP_NODELAY=1
 socket = r:TCP_NODELAY=1
 #compression = rle
 
-[https]
+[http]
+client = yes
 accept = 80
 connect = $PROXY_SERVER
 TIMEOUTclose = 0
