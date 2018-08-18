@@ -39,6 +39,7 @@ then
 # Certificate/key is needed in server mode
 cert = $CERTIFICATE
 key = $PRIVATE_KEY
+CApath = /etc/ssl/certs
 
 # Some security enhancements for UNIX systems - comment them out on Win32
 # chroot = /chroot/stunnel/
@@ -68,6 +69,7 @@ else
 # Certificate/key is optional in client mode
 cert = $CERTIFICATE
 key = $PRIVATE_KEY
+CApath = /etc/ssl/certs
 
 # Some security enhancements for UNIX systems - comment them out on Win32
 # chroot = /chroot/stunnel/
