@@ -57,6 +57,7 @@ socket = r:TCP_NODELAY=1
 accept = 443
 connect = squid:3128
 TIMEOUTclose = 0
+PSKsecrets = /etc/stunnel/psk.txt
 
 EOF
 else
@@ -88,9 +89,16 @@ accept = 80
 connect = $PROXY_SERVER
 TIMEOUTclose = 0
 verifyChain = no
+PSKsecrets = /etc/stunnel/psk.txt
 
 EOF
 fi
+
+STUNNEL_SECRETS=${STUNNEL_SECRETS:-"user:stevenseagal"}
+
+cat <<EOF > /etc/stunnel/psk.txt
+${STUNNEL_SECRETS}
+EOF
 
 # start stunnel in foreground
 echo "Starting Stunnel..."
