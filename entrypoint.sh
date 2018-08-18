@@ -20,6 +20,9 @@ fi
 if test -f /etc/certs/gsmlg.org/gsmlg.org.key
 then
     cp /etc/certs/gsmlg.org/gsmlg.org.key $KEY
+    VERIFY_CHAIN=${STUNNEL_VERIFY_CHAIN:-yes}
+else
+    VERIFY_CHAIN=${STUNNEL_VERIFY_CHAIN:-no}
 fi
 
 PROXY_MODE=${PROXY_MODE:-master}
@@ -57,7 +60,6 @@ socket = r:TCP_NODELAY=1
 accept = 443
 connect = squid:3128
 TIMEOUTclose = 0
-PSKsecrets = /etc/stunnel/psk.txt
 
 EOF
 else
@@ -88,17 +90,11 @@ client = yes
 accept = 80
 connect = $PROXY_SERVER
 TIMEOUTclose = 0
-verifyChain = no
-PSKsecrets = /etc/stunnel/psk.txt
+verifyChain = ${VERIFY_CHAIN}
 
 EOF
 fi
 
-STUNNEL_SECRETS=${STUNNEL_SECRETS:-"user:stevenseagal"}
-
-cat <<EOF > /etc/stunnel/psk.txt
-${STUNNEL_SECRETS}
-EOF
 
 # start stunnel in foreground
 echo "Starting Stunnel..."
