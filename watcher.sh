@@ -10,7 +10,7 @@ case $EVENT in
   c)
     if test $("$NGINX" -t; echo $?) -eq 0
     then
-      if test $(ps aux |grep nginx |grep 'master process nginx' |grep -v grep |wc -l) -eq 1
+      if test $(ps aux |grep nginx |grep 'master process' |grep -v grep |wc -l) -eq 1
       then
         "$NGINX" "-s" "reload"
       else
