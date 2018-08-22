@@ -12,7 +12,7 @@ case $EVENT in
     then
       if test $(ps aux |grep 'master process nginx' |grep -v grep |wc -l) -eq 1
       then
-        exec "$NGINX" -s reload
+        exec "$NGINX" "-s" "reload"
       else
         exec "$NGINX"
       fi
