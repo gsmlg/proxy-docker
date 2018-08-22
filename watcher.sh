@@ -12,8 +12,10 @@ case $EVENT in
     then
       if test $(ps aux |grep nginx |grep 'master process' |grep -v grep |wc -l) -eq 1
       then
+        echo "nginx reload ..."
         "$NGINX" "-s" "reload"
       else
+        echo "nginx start ..."
         "$NGINX"
       fi
     fi
