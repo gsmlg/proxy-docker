@@ -59,7 +59,7 @@ socket = r:TCP_NODELAY=1
 
 [https]
 accept = 443
-connect = squid:3128
+connect = localhost:3128
 TIMEOUTclose = 0
 
 EOF
