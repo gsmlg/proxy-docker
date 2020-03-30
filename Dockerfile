@@ -16,3 +16,4 @@ EXPOSE 3128
 COPY entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
+
